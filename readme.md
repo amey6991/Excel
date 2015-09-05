@@ -172,7 +172,7 @@ By using this function we can get the excel file in the given path. it return an
 
  2. creating sheet & download it in given path :
 
-    <?php
+   		<?php
 	    require_once 'classes/class.ExcelWork.php';
 	    $objWork=new ExcelWork();
 	    $objWork->createSheet();
@@ -183,7 +183,7 @@ By using this function we can get the excel file in the given path. it return an
 
  3. Give Header Data to set in sheet :
 
-       <?php
+       	<?php
 	    require_once 'classes/class.ExcelWork.php';
 	    $objWork=new ExcelWork();
 	    $objWork->createSheet();
@@ -217,7 +217,7 @@ By using this function we can get the excel file in the given path. it return an
  5. Merge Cell , Color in column , Bold Text :
  
 
-    <?php
+    		<?php
 		   require_once 'classes/class.ExcelWork.php';
 		    $objWork=new ExcelWork();
 		    $objWork->createSheet();
@@ -235,4 +235,4 @@ By using this function we can get the excel file in the given path. it return an
 			$objWork->setExcelFilename("MyFirstExcel");
 			$objWork->setExcelFileExtension('xlsx');
 			$objWork->exportFile();
-	?>
+			?>
