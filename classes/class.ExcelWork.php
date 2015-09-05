@@ -1,6 +1,6 @@
 <?php
-	include_once 'lib/PHPExcel/PHPExcel.php';
-	
+	$sDpath=dirname(__DIR__);
+	include_once $sDpath.'/lib/PHPExcel/PHPExcel.php';
 	class ExcelWork extends PHPExcel{
 		public $iNoOfCol=0;
 		public $sFileName='defaultExcelFile';
