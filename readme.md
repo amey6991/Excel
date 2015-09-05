@@ -157,3 +157,86 @@ By using this function we can get the excel file in the given path. it return an
 
     $aFileDetails=$objWork->exportFileWithPath('/var/www/Test/Excel/download');
 
+**Example**
+
+ 1. creating sheet & download it :
+ 
+
+    <?php
+	    require_once 'classes/class.ExcelWork.php';
+	    $objWork=new ExcelWork();
+	    $objWork->createSheet();
+	    $objWork->setExcelFilename("MyFirstExcel");
+		$objWork->setExcelFileExtension('xlsx');
+		$objWork->exportFile();
+   ?>
+
+ 2. creating sheet & download it in given path :
+ 
+
+    <?php
+	    require_once 'classes/class.ExcelWork.php';
+	    $objWork=new ExcelWork();
+	    $objWork->createSheet();
+	    $objWork->setExcelFilename("MyFirstExcel");
+		$objWork->setExcelFileExtension('xlsx');
+		$aFileDetails= $objWork->exportFileWithPath('/var/www/Test/Excel/download');
+		// $aFileDetails will have path , fullpath & filename in array
+   ?>
+
+ 3. Give Header Data to set in sheet :
+ 
+
+    <?php
+	    require_once 'classes/class.ExcelWork.php';
+	    $objWork=new ExcelWork();
+	    $objWork->createSheet();
+		$aHeaders=array('Sr No','Name','State','City','Pin Code','Mobile No'); 
+		$objWork->setHeaderNames($aHeaders);
+		$objWork->setExcelFilename("MyFirstExcel");
+		$objWork->setExcelFileExtension('xlsx');
+		$objWork->exportFile();
+	?>
+
+ 4. Give Header & Row data to set in sheet :
+ 
+
+	    <?php
+		    require_once 'classes/class.ExcelWork.php';
+		    $objWork=new ExcelWork();
+		    $objWork->createSheet();
+			$aHeaders=array('Sr No','Name','State','City','Pin Code','Mobile No'); 
+			$aExportData=array(array('1','JOHN','UK','London','411028','1234567890'),
+				array('2','mark','US','NY','411028','123456789'),
+				array('3','Petert','Brasil','Parogue','493661','0123456789'),
+				array('4','Michel','','123456','493661',''),
+				array('5','Abdul','Pakistan','karachi','411028','0123456789'),
+			);
+			$objWork->setDataAndColumnToExcel($aHeaders,$aExportData);
+			$objWork->setExcelFilename("MyFirstExcel");
+			$objWork->setExcelFileExtension('xlsx');
+		$objWork->exportFile();
+	?>
+
+ 5. Merge Cell , Color in column , Bold Text :
+ 
+
+    <?php
+		   require_once 'classes/class.ExcelWork.php';
+		    $objWork=new ExcelWork();
+		    $objWork->createSheet();
+			$aHeaders=array('Sr No','Name','State','City','Pin Code','Mobile No'); 
+			$aExportData=array(array('1','JOHN','UK','London','411028','1234567890'),
+				array('2','mark','US','NY','411028','123456789'),
+				array('3','Petert','Brasil','Parogue','493661','0123456789'),
+				array('4','Michel','','123456','493661',''),
+				array('5','Abdul','Pakistan','karachi','411028','0123456789'),
+			);
+			$objWork->setDataAndColumnToExcel($aHeaders,$aExportData);
+			$objWork->setColorByColum(1,3,'C01AA1');
+			$objWork->excelmergeColumnsByRow(1,4,8);
+			$objWork->setHeaderTextAtEnd("This is a header between this merged column");
+			$objWork->setExcelFilename("MyFirstExcel");
+			$objWork->setExcelFileExtension('xlsx');
+			$objWork->exportFile();
+   ?>
