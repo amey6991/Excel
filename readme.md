@@ -227,7 +227,7 @@ By using this function we can get the excel file in the given path. it return an
 				array('3','Petert','Brasil','Parogue','493661','0123456789'),
 				array('4','Michel','','123456','493661',''),
 				array('5','Abdul','Pakistan','karachi','411028','0123456789'),
-			);
+				);
 			$objWork->setDataAndColumnToExcel($aHeaders,$aExportData);
 			$objWork->setColorByColum(1,3,'C01AA1');
 			$objWork->excelmergeColumnsByRow(1,4,8);
