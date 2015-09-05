@@ -223,9 +223,9 @@
 		}
 		
 		// setting text as bold for all column
-		function setTextBold(){
-			$this->excel->getActiveSheet()->getStyle('A:Z')->getFont()->setBold(true);
-		}
+		//function setTextBold(){
+		//	$this->excel->getActiveSheet()->getStyle('A:Z')->getFont()->setBold(true);
+		//}
 
 		// set the specific column & row for text bold in our data sheet 
 		function setTextBoldAccor($iFirstColumn,$iFirstRow,$iLastColumn,$iLastRow){
@@ -253,7 +253,7 @@
 			if(empty($sPath)){
 					$sDIRPath=dirname(__DIR__);
 					if(is_dir($sDIRPath.'/downloads')){
-						$sFullPath=$sDIRPath.'/downloads/';
+						$sFullPath=$sDIRPath.'/downloads';
 						$this->sFileName=$this->getExcelFileName().'.'.$this->sFileExtension;
 						$objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
 						$objWriter->save($sFullPath.'/'.$this->sFileName);
@@ -262,7 +262,7 @@
 						exit;
 					}else{
 						mkdir($sDIRPath.'/downloads/',0777);
-						$sFullPath=$sDIRPath.'/downloads/';
+						$sFullPath=$sDIRPath.'/downloads';
 						$this->sFileName=$this->getExcelFileName().'.'.$this->sFileExtension;
 						$objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
 						$objWriter->save($sFullPath.'/'.$this->sFileName);
