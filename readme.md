@@ -186,7 +186,7 @@ By using this function we can get the excel file in the given path. it return an
  3. Give Header Data to set in sheet :
  
 
-      <?php
+       <?php
 	    require_once 'classes/class.ExcelWork.php';
 	    $objWork=new ExcelWork();
 	    $objWork->createSheet();
@@ -195,7 +195,7 @@ By using this function we can get the excel file in the given path. it return an
 		$objWork->setExcelFilename("MyFirstExcel");
 		$objWork->setExcelFileExtension('xlsx');
 		$objWork->exportFile();
-	?>
+		?>
 
  4. Give Header & Row data to set in sheet :
  
@@ -238,4 +238,4 @@ By using this function we can get the excel file in the given path. it return an
 			$objWork->setExcelFilename("MyFirstExcel");
 			$objWork->setExcelFileExtension('xlsx');
 			$objWork->exportFile();
-   ?>
+		?>
