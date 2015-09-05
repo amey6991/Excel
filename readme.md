@@ -160,21 +160,20 @@ By using this function we can get the excel file in the given path. it return an
 **Example**
 
  1. creating sheet & download it :
- 
 
-    <?php
+        <?php
 	    require_once 'classes/class.ExcelWork.php';
 	    $objWork=new ExcelWork();
 	    $objWork->createSheet();
 	    $objWork->setExcelFilename("MyFirstExcel");
 		$objWork->setExcelFileExtension('xlsx');
 		$objWork->exportFile();
-   ?>
+	   ?>
 
  2. creating sheet & download it in given path :
  
 
-    <?php
+      <?php
 	    require_once 'classes/class.ExcelWork.php';
 	    $objWork=new ExcelWork();
 	    $objWork->createSheet();
@@ -182,12 +181,12 @@ By using this function we can get the excel file in the given path. it return an
 		$objWork->setExcelFileExtension('xlsx');
 		$aFileDetails= $objWork->exportFileWithPath('/var/www/Test/Excel/download');
 		// $aFileDetails will have path , fullpath & filename in array
-   ?>
+	   ?>
 
  3. Give Header Data to set in sheet :
  
 
-    <?php
+      <?php
 	    require_once 'classes/class.ExcelWork.php';
 	    $objWork=new ExcelWork();
 	    $objWork->createSheet();
@@ -216,12 +215,12 @@ By using this function we can get the excel file in the given path. it return an
 			$objWork->setExcelFilename("MyFirstExcel");
 			$objWork->setExcelFileExtension('xlsx');
 		$objWork->exportFile();
-	?>
+		?>
 
  5. Merge Cell , Color in column , Bold Text :
  
 
-    <?php
+       <?php
 		   require_once 'classes/class.ExcelWork.php';
 		    $objWork=new ExcelWork();
 		    $objWork->createSheet();
