@@ -171,7 +171,6 @@ By using this function we can get the excel file in the given path. it return an
 	     ?>
 
  2. creating sheet & download it in given path :
- 
 
     <?php
 	    require_once 'classes/class.ExcelWork.php';
@@ -183,7 +182,6 @@ By using this function we can get the excel file in the given path. it return an
 		?>
 
  3. Give Header Data to set in sheet :
- 
 
        <?php
 	    require_once 'classes/class.ExcelWork.php';
