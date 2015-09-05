@@ -29,21 +29,21 @@ _____________________________________________________________________
 		This function is create a sheet in excel file which is by default index as ‘0’.
 		example:
 
-    $objWork=new ExcelWork(); 
+    $objWork=new ExcelWork(); // creating object of included class
     
-	$objWork->createSheet();  
+	$objWork->createSheet();  // it will create sheet
 
  2. *setTotalSheet() :*
 	 If you want to create multiple sheets just pass the number is argument as ‘setTotalSheet(4)’. it will create 5 sheets inside the excel file.
 	 
 
-    $objWork->setTotalSheet(5);   
+    $objWork->setTotalSheet(5);  //  
 
  3. *setActiveSheetOfExcel() :* 
 	 If you are doing multiple task in multiple sheets , then you need to use this function for individual task in the current sheet. just pass the number of sheet and then after all other function will work on this sheet only , to change again the sheet you can use this.like this ‘setActiveSheetOfExcel(2)’ . indexing starts from 0 to n.
 	 
 
-    $objWork->setActiveSheetOfExcel(3); t
+    $objWork->setActiveSheetOfExcel(3); // if you have multiple sheet
 
  4. *setNameOfSheetCreater(‘any name’) :* 
 	 By this function you can give name to sheet who created that this sheet. pass the name is argument.
@@ -135,11 +135,6 @@ By this funtion we can set the text as bold for this column only , here it will 
 By this function you can set the text as bold by giving specific column number & row number. here ‘4’ is column number & ‘6’ is row number. 
 
     $objWork->setTextSingleBold(4,1); 
-
- 26. *setTextBold() :* 
-It will make all text as bold of each row & column.
-
-    $objWork->setTextBold();
 
  27. *setTextFontSize(15) :* 
 By using this function we can set the text font size for the sheet , ‘15’ is size which we are setting.
