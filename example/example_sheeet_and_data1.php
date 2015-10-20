@@ -1,6 +1,7 @@
 <?php
 	set_time_limit(120);
-	require_once 'classes/class.ExcelWork.php';
+	$sDpath=dirname(__DIR__);
+	require_once $sDpath.'/classes/class.ExcelWork.php';
 	$objWork=new ExcelWork();
 
 	$objWork->createSheet(); // creating a sheet
