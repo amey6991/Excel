@@ -1,6 +1,8 @@
 <?php
 	$sDpath=dirname(__DIR__);
+
 	include_once $sDpath.'/lib/PHPExcel/PHPExcel.php';
+	
 	class ExcelWork extends PHPExcel{
 		public $iNoOfCol=0;
 		public $sFileName='defaultExcelFile';
@@ -31,7 +33,7 @@
 		function setActiveSheetOfExcel($iNumber){
 				$this->excel->setActiveSheetIndex($iNumber); // seted the active sheet by passing the index	
 		}
-		//
+		// Use this function only for multiple sheet , single sheets are work without it
 		function setInitialRowValue(){
 			$this->iRow=1;
 		}
