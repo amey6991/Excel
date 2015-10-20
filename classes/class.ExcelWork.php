@@ -26,13 +26,14 @@
 		}
 		function getActiveSheetIndexValue(){
 			$sheet=$this->excel->getActiveSheet();
-				// echo "<pre>";
-				// print_r($sheet);
-				// exit();
 		}
 		// it will set the sheet as current sheet in excel file , by just passign the index of sheet
 		function setActiveSheetOfExcel($iNumber){
 				$this->excel->setActiveSheetIndex($iNumber); // seted the active sheet by passing the index	
+		}
+		//
+		function setInitialRowValue(){
+			$this->iRow=1;
 		}
 		// it will set the sheet create name
 		function setNameOfSheetCreater($sName){
@@ -165,7 +166,7 @@
 		function setHeaderTextAtEnd($sString){
 				$this->excelMergeColumnsByRow(1,15,$this->iRow);
 				$sRow='A'.$this->iRow;
-				$this->excel->getActiveSheet()->getStyle("$sRow")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+				$this->excel->getActiveSheet()->getStyle("$sRow")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
 				$this->excel->getActiveSheet()->setCellValueByColumnAndRow(0,$this->iRow,$sString);
 				$this->iRow++;
 		}
@@ -251,25 +252,7 @@
 		function exportFileWithPath($sPath){
 			$sPath=realpath($sPath);
 			if(empty($sPath)){
-					$sDIRPath=dirname(__DIR__);
-					if(is_dir($sDIRPath.'/downloads')){
-						$sFullPath=$sDIRPath.'/downloads';
-						$this->sFileName=$this->getExcelFileName().'.'.$this->sFileExtension;
-						$objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
-						$objWriter->save($sFullPath.'/'.$this->sFileName);
-						$aFileDetail=array('filename'=>$this->sFileName,'path'=>$sFullPath,'fullpath'=>$sFullPath.'/'.$this->sFileName);
-						return $aFileDetail;
-						exit;
-					}else{
-						mkdir($sDIRPath.'/downloads/',0777);
-						$sFullPath=$sDIRPath.'/downloads';
-						$this->sFileName=$this->getExcelFileName().'.'.$this->sFileExtension;
-						$objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
-						$objWriter->save($sFullPath.'/'.$this->sFileName);
-						$aFileDetail=array('filename'=>$this->sFileName,'path'=>$sFullPath,'fullpath'=>$sFullPath.'/'.$this->sFileName);
-						return $aFileDetail;
-						exit;
-					}
+					echo "Wrong Path Given.";
 				
 			}else{
 				if($this->sFileExtension=='xls'){
