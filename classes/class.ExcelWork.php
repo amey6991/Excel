@@ -1,8 +1,6 @@
 <?php
 	$sDpath=dirname(__DIR__);
-
 	include_once $sDpath.'/lib/PHPExcel/PHPExcel.php';
-	
 	class ExcelWork extends PHPExcel{
 		public $iNoOfCol=0;
 		public $sFileName='defaultExcelFile';
@@ -28,14 +26,12 @@
 		}
 		function getActiveSheetIndexValue(){
 			$sheet=$this->excel->getActiveSheet();
+			$this->iRow=0;
 		}
 		// it will set the sheet as current sheet in excel file , by just passign the index of sheet
 		function setActiveSheetOfExcel($iNumber){
 				$this->excel->setActiveSheetIndex($iNumber); // seted the active sheet by passing the index	
-		}
-		// Use this function only for multiple sheet , single sheets are work without it
-		function setInitialRowValue(){
-			$this->iRow=1;
+				$this->iRow=0;
 		}
 		// it will set the sheet create name
 		function setNameOfSheetCreater($sName){
@@ -105,6 +101,10 @@
 				break;
 			}
 		}
+		// function to hide the column
+		function setUnVisibleToColumn($sColumn){
+			$this->excel->getActiveSheet()->getColumnDimension($sColumn)->setVisible(false);
+		}
 		// it returns the column index , argument shoul be in A..Z , it return the
 		// index value of that column 
 		function getColumnValueNumber($columnstring){
@@ -159,18 +159,25 @@
 			$this->iRow++;
 		}
 		// set the header Text by passing the column & row number and the text
-		function setHeaderText($iFirstColumn,$iLastColumn,$iRoww,$sString){
+		function setHeaderText($iFirstColumn,$iRoww,$sString){
 			$this->excel->getActiveSheet()->setCellValueByColumnAndRow($iFirstColumn,$iRoww,$sString);
 			$this->iRow=$iRoww;
 			$this->iRow++;
+		}
+		function setHeaderByColumn($iFirstColumn,$iRow,$sString){
+
 		}
 		// it will set Header Text at the end of the sheet..
 		function setHeaderTextAtEnd($sString){
 				$this->excelMergeColumnsByRow(1,15,$this->iRow);
 				$sRow='A'.$this->iRow;
-				$this->excel->getActiveSheet()->getStyle("$sRow")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+				$this->excel->getActiveSheet()->getStyle("$sRow")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 				$this->excel->getActiveSheet()->setCellValueByColumnAndRow(0,$this->iRow,$sString);
 				$this->iRow++;
+		}
+		// function to set any message bin current row.
+		function setTextInCurrentRow($sMSG){
+				$this->excel->getActiveSheet()->setCellValueByColumnAndRow(0,$this->iRow,$sMSG);
 		}
 		// it skips row or create blank rows in sheet 
 		function setRowsInsideSheet($iNumber){
@@ -185,23 +192,32 @@
 			}
 			// $this->excel->getActiveSheet()->getStyle('A1:Z1')->getFont()->setBold(true);
 			$this->iRow++;
-			foreach ($aData as $iKey => $aValue) {
-				foreach ($aValue as $iKey1 => $sValue1) {
-					$this->excel->getActiveSheet()->setCellValueByColumnAndRow($iKey1,$this->iRow,$sValue1);	
+			if(!empty($aData)){
+				foreach ($aData as $iKey => $aValue) {
+					foreach ($aValue as $iKey1 => $sValue1) {
+						$this->excel->getActiveSheet()->setCellValueByColumnAndRow($iKey1,$this->iRow,$sValue1);	
+					}
+					$this->iRow++;
 				}
-				$this->iRow++;
+			}else{
+				$this->excel->getActiveSheet()->setCellValueByColumnAndRow($iKey1,$this->iRow,"No Data Found.");	
 			}
+			
 		}
 		// if there is no Header or already seted then it will set your excel data only.
 		function setDataToExcel($aData){
-			foreach ($aData as $iKey => $aValue) {
-				foreach ($aValue as $iKey1 => $sValue1) {
-					$this->excel->getActiveSheet()->setCellValueByColumnAndRow($iKey1,$this->iRow,$sValue1);	
+			if(!empty($aData)){
+					foreach ($aData as $iKey => $aValue) {
+						foreach ($aValue as $iKey1 => $sValue1) {
+							$this->excel->getActiveSheet()->setCellValueByColumnAndRow($iKey1,$this->iRow,$sValue1);
+						}
+					$this->iRow++;
+					}
+			}else{
+				$this->excel->getActiveSheet()->setCellValueByColumnAndRow(0,$this->iRow,"No Data Found.");	
 				}
-				$this->iRow++;
-			}
 		}
-
+	
 		// giving filename to excel file
 		function setExcelFilename($sFilenamee){
 				$this->sFileName=$sFilenamee;
@@ -274,6 +290,13 @@
 				}
 			}
 		}
+		function export($sPath){
+			$sPath=realpath($sPath);
+			$this->sFileName=$this->getExcelFileName().'.'.$this->sFileExtension;
+			$objWriter = new PHPExcel_Writer_Excel2007($this->excel);
+			echo $sPath.'/'.$this->sFileName;
+			$objWriter->save($sPath.'/'.$this->sFileName);
+		}
 		// it download the file in default download folder & force to browser to download file 
 		function exportFile(){
 			if($this->sFileExtension=='xls'){
@@ -281,6 +304,7 @@
 				$this->sFileName=$this->getExcelFileName().'.'.$this->sFileExtension;
 				header('Content-Disposition: attachment; filename='.$this->sFileName);
 				$objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
+				ob_end_clean();
 				$objWriter->save('php://output');
 				exit;
 
@@ -289,6 +313,7 @@
 				$this->sFileName=$this->getExcelFileName().'.'.$this->sFileExtension;
 				header('Content-Disposition: attachment; filename='.$this->sFileName);
 				$objWriter = new PHPExcel_Writer_Excel2007($this->excel);
+				ob_end_clean();
 				$objWriter->save('php://output');
 				exit;
 			}
@@ -296,3 +321,4 @@
 	}
 		
 ?>
+
