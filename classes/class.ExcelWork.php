@@ -31,7 +31,7 @@
 		// it will set the sheet as current sheet in excel file , by just passign the index of sheet
 		function setActiveSheetOfExcel($iNumber){
 				$this->excel->setActiveSheetIndex($iNumber); // seted the active sheet by passing the index	
-				$this->iRow=0;
+				$this->iRow=1;
 		}
 		// it will set the sheet create name
 		function setNameOfSheetCreater($sName){
@@ -164,9 +164,6 @@
 			$this->iRow=$iRoww;
 			$this->iRow++;
 		}
-		function setHeaderByColumn($iFirstColumn,$iRow,$sString){
-
-		}
 		// it will set Header Text at the end of the sheet..
 		function setHeaderTextAtEnd($sString){
 				$this->excelMergeColumnsByRow(1,15,$this->iRow);
@@ -246,6 +243,17 @@
 		//	$this->excel->getActiveSheet()->getStyle('A:Z')->getFont()->setBold(true);
 		//}
 
+		// Function to hide the column while Exporting
+		function fHideColumn($iColumnValue){
+			$sColumnChar=$this->getColumnValueChar($iColumnValue);
+			$this->excel->getActiveSheet()->getColumnDimension("$sColumnChar")->setVisible(false);
+		}
+		// function to make column visible while reading
+		function fVisibleColumn($iColumnValue){
+			$sColumnChar=$this->getColumnValueChar($iColumnValue);
+			$this->excel->getActiveSheet()->getColumnDimension("$sColumnChar")->setVisible(true);
+		}
+
 		// set the specific column & row for text bold in our data sheet 
 		function setTextBoldAccor($iFirstColumn,$iFirstRow,$iLastColumn,$iLastRow){
 			$sFirstColumn=$this->getColumnValueChar($iFirstColumn);
@@ -321,4 +329,3 @@
 	}
 		
 ?>
-
