@@ -326,6 +326,23 @@
 				exit;
 			}
 		}
+
+		//!! Function to text aligned center for Merge Cells
+		function fExcelMergeCellWithAlignCenterText($iFirstColumn,$iLastColumn,$iRoww){
+			$sFirstColumnChar=$this->getColumnValueChar($iFirstColumn);
+			$sFirstColumnChar=$sFirstColumnChar.$iRoww;
+			$sLastColumnChar=$this->getColumnValueChar($iLastColumn);
+			$sLastColumnChar=$sLastColumnChar.$iRoww;
+			$this->excel->getActiveSheet()->mergeCells("$sFirstColumnChar:$sLastColumnChar");
+
+		    $aStyle = array(
+		        'alignment' => array(
+		            'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+		        )
+		    );
+
+    		$this->excel->getActiveSheet()->getStyle("$sFirstColumnChar:$sLastColumnChar")->applyFromArray($aStyle);
+		}
 	}
 		
 ?>
